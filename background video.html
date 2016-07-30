@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<style>
+
+video#bgvid {
+ 
+right: 0; 
+bottom: 0;
+min-width: 100%; 
+min-height: 100%;
+width: auto; 
+height: auto; 
+background: url(bg.png) no-repeat;
+background-size: cover;
+z-index:-1;
+}
+
+video { display: block; }
+
+.myButton{
+background: url(button.png) no-repeat;
+margin:0 auto;
+width:300px;
+height:300px;
+
+}
+p{
+text-align:center;	
+}
+</style>
+
+
+</head>
+
+<body>
+
+<video autoplay loop poster="bg.png" id="bgvid">
+<source src="cactopia.mp4" type="video/mp4">
+</video>
+Click here to enter.
+
+<div class="myButton"></div>
+</body>
+</html>
