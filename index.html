@@ -1,52 +1,22 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Aviel Resnick</title>
-<link href="site.css" rel="stylesheet">
+<title>Page With Video Background</title>
 <style>
-
-
-video#bgvid {
-position: fixed;
-right: 0; 
-bottom: 0;
-min-width: 100%; 
-min-height: 100%;
-width: auto; 
-height: auto; 
-background: url(bg.png) no-repeat;
-background-size: cover;
-z-index:-1;
-}
-
-video { display: block; }
-
-.myButton{
-background: url(button.png) no-repeat;
-margin:0 auto;
-width:300px;
-height:300px;
-
-}
-p{
-text-align:center;	
-}
+body{ margin:0px; background:#000; }
+#bg_container{ height:500px; overflow:hidden; }
+#bg{ width:100%; }
+#content{ position:absolute; top:0px; padding:30px; color:#FFF; text-shadow:#000 2px 2px; }
 </style>
-
-
 </head>
-
 <body>
-
-<video autoplay loop poster="bg.png" id="bgvid">
-<source src="cactopia.mp4" type="video/mp4">
-</video>
-Click here to enter.
-
-<div class="myButton"></div>
-
-<script src="script.js"></script>
-
+<div id="bg_container">
+  <video id="bg" src="video/page_bg.mp4" autoplay="true" loop="true" muted="true"></video>
+</div>
+<div id="content">
+  <h1>Web page with HD looping video background</h1>
+  <h2>Using CSS the video is simply placed underneath our HTML content</h2>
+</div>
 </body>
 </html>
