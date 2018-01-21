@@ -3,11 +3,7 @@ body, html {
 }
 .topImage {
     /* The image used */
-    background-image: url(images/header.jpeg);
-
-    /* Filter */
-    filter: grayscale(100%);
-    filter: blur(12px);
+    background-image: url(images/header.jpg);
 
     /* Full height */
     height: 100%;
@@ -24,7 +20,7 @@ body, html {
     font-size: 70pt;
     font-family: "Open Sans", sans-serif;
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -44,8 +40,21 @@ body, html {
     -moz-animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     -o-animation-fill-mode: forwards;
+}
 
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    padding-right: 100px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
 
+.fa:hover {
+    color: white;
+    opacity: 0.4;
 }
 
 .dev {
