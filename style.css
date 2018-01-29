@@ -17,7 +17,7 @@ body, html {
 
 .hello {
     color: white;
-    font-size: 70pt;
+    font-size: 85pt;
     font-family: "Open Sans", sans-serif;
     position: absolute;
     top: 45%;
@@ -121,13 +121,27 @@ devFont {
   font-size: 50pt;
 }
 
-hr {
-    display: block;
+
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border-width: medium;
+    border-color: white;
     color: white;
-    margin-top: 10pt;
-    margin-bottom: 0;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: inset;
-    border-width: 1px;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 25pt;
+    font-family: "Open Sans", sans-serif;
+}
+
+hr {
+  display: block;
+  color: white;
+  margin-top: 10pt;
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
 }
