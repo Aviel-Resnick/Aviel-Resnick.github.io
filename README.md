@@ -4,4 +4,4 @@ A personal effort to express myself, and my skills, in a manner which can be eas
 
 # Currently Under Construction #
 
-*Created in HTML and CSS
+*Created in HTML and CSS, utilizing the Bootstrap Framework 
