@@ -15,6 +15,10 @@ body, html {
     background-attachment: fixed;
 }
 
+.github-card {
+    padding: 20px;
+}
+
 .hello {
     color: white;
     font-size: 85pt;
