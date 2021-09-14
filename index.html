@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
     <head>
     <meta charset="UTF-8">
@@ -14,10 +15,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/images/icon.png">
+=======
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>3D Object</title>
+        <link rel="stylesheet" href="styles.css">
+
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+>>>>>>> 22db800fbba5891650b5c8fc6df3415e90562921
     </head>
 
     <body>
 
+<<<<<<< HEAD
         <a href="#" onclick="upArrow();return false;" class="arrow arrow-top"></a>
         <a href="#" onclick="downArrow();return false;" class="arrow arrow-bottom"></a>
         <a href="#" onclick="leftArrow();return false;" class="arrow arrow-left"></a>
@@ -154,3 +166,58 @@
 
     <script src="js/script.js"></script>
 </html>
+=======
+    <div id="container">
+      <div id="navbar">
+          <div id="logo">
+              <img src="logo.png" alt="logo">
+          </div>
+          <ul>
+              <li class="active">
+                  <a href="#">Home</a>
+              </li>
+              <li><a href="#">Tech</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Help</a></li>
+          </ul>
+      </div>
+
+      <div id="aSide">
+      
+        <model-viewer src="card.glb" camera-controls shadow-intensity="1">
+
+          <div class="progress-bar hide" slot="progress-bar">
+              <div class="update-bar"></div>
+          </div>
+          <button slot="ar-button" id="ar-button">
+              View in your space
+          </button>
+          <div id="ar-prompt">
+          </div>
+      </model-viewer>
+      
+      
+
+      </div>
+
+    <div id="content">
+        <h2>Avi Resnick</h2>
+        <p>Work in progress</p>
+        <button>Button</button>
+    </div>
+
+    <div id="icons">
+        <div id="iconsLogo">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fab fa-twitter"></i>
+        </div>
+    </div>
+
+    </div>
+
+    </body>
+</html>
+>>>>>>> 22db800fbba5891650b5c8fc6df3415e90562921
