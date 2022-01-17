@@ -255,6 +255,7 @@ blue {
   }
   
 .arrow-top {
+    /* display: none; */
     position: absolute;
     top: 10vh;
     bottom: 0;
@@ -264,6 +265,7 @@ blue {
     animation-name: bouncey-up;
 }
 .arrow-right {
+    /* display: none; */
     position: absolute;
     top: 47vh;
     left: 50vw;
@@ -272,6 +274,7 @@ blue {
     animation-name: bouncey-right;
 }
 .arrow-bottom {
+    /* display: none; */
     position: absolute;
     top: 83vh;
     left: 50vw;
@@ -280,6 +283,7 @@ blue {
     animation-name: bouncey-down;
 }
 .arrow-left {
+    /* display: none; */
     position: absolute;
     top: 47vh;
     left: 50vw;
