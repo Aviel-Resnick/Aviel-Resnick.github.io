@@ -8,6 +8,12 @@ card_project2 = document.getElementById("card-project2")
 card_work1 = document.getElementById("card-work1")
 card_work2 = document.getElementById("card-work2")
 
+// arrows
+up_arrow = document.getElementById("up-arrow")
+down_arrow = document.getElementById("down-arrow")
+left_arrow = document.getElementById("left-arrow")
+right_arrow = document.getElementById("right-arrow")
+
 // neighbors order: up, down, left, right
 const neighbors = new Map();
 neighbors.set("card-home", [card_resume, card_edu, card_project1, card_work1]);
@@ -109,12 +115,7 @@ function rightArrow() {
 }
 
 // TODO: iterate through an array of the courses / the keys of neighbors for modularity
-function activate(card) {
-    for (let [key, value] of neighbors) {
-        console.log(key + " = " + value);
-        curr = document.getElementById(key);
-    }
-
+function activate(card) { 
     card_home.style.display = "none";
     card_resume.style.display = "none";
     card_edu.style.display = "none";
@@ -123,6 +124,30 @@ function activate(card) {
     card_project2.style.display = "none";
     card_work1.style.display = "none";
     card_work2.style.display = "none";
-
+    
     card.style.display = "block";
+    
+    curr_card = getCurrCard()
+    
+    up_arrow.style.display = "none";
+    down_arrow.style.display = "none";
+    left_arrow.style.display = "none";
+    right_arrow.style.display = "none";
+
+    if (neighbors.get(curr_card)[0] != null) {
+        up_arrow.style.display = "block";
+    }
+
+    if (neighbors.get(curr_card)[1] != null) {
+        down_arrow.style.display = "block";
+    }
+
+    if (neighbors.get(curr_card)[2] != null) {
+        left_arrow.style.display = "block";
+    }
+
+    if (neighbors.get(curr_card)[3] != null) {
+        right_arrow.style.display = "block";
+    }
+
 }
