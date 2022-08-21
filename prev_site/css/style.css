@@ -54,10 +54,16 @@ blue {
 
 #home-text {
     font-family: 'Space Mono', monospace;
-    font-size: 3vh;
+    /* font-size: 3vh; */
+    font-size: 1.5vw;
     margin-top: 10vh;
     margin-left: 5vw;
     margin-right: 5vw;
+}
+
+#side-buttons {
+    font-family: 'Space Mono', monospace;
+    float: right;
 }
 
 .note {
@@ -249,6 +255,7 @@ blue {
   }
   
 .arrow-top {
+    /* display: none; */
     position: absolute;
     top: 10vh;
     bottom: 0;
@@ -258,6 +265,7 @@ blue {
     animation-name: bouncey-up;
 }
 .arrow-right {
+    /* display: none; */
     position: absolute;
     top: 47vh;
     left: 50vw;
@@ -266,6 +274,7 @@ blue {
     animation-name: bouncey-right;
 }
 .arrow-bottom {
+    /* display: none; */
     position: absolute;
     top: 83vh;
     left: 50vw;
@@ -274,6 +283,7 @@ blue {
     animation-name: bouncey-down;
 }
 .arrow-left {
+    /* display: none; */
     position: absolute;
     top: 47vh;
     left: 50vw;
