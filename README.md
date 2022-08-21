@@ -1,3 +1,3 @@
-# nsobotka.github.io
+# AvielResnick.com
 
-Welcome to my GitHub pages! Please visit https://nsobotka.github.io to learn more about me.
+My personal website.
