@@ -204,6 +204,7 @@ footer {
   cursor: pointer;
   font-weight: 500;
   margin: 6px;
+  margin-bottom: 25px;
 }
 
 @media print, screen and (max-width: 960px) {
