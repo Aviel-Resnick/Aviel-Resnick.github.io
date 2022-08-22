@@ -22,10 +22,12 @@ h1, h2, h3 {
 h1 {
   font-size:28px;
   font-weight: 500;
+  color: #40739e
 }
 
 h2 {
-  color:#393939;
+  color:#40739e;
+  /* color:#393939; */
   font-weight: 500;
 }
 
@@ -192,6 +194,16 @@ footer {
   position:fixed;
   bottom:50px;
   -webkit-font-smoothing:subpixel-antialiased;
+}
+
+.button {
+  border: 2px solid #40739e;
+  border-radius: 3px;
+  padding: 10px;
+  color: #40739e;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 6px;
 }
 
 @media print, screen and (max-width: 960px) {
