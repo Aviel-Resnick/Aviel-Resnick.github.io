@@ -42,6 +42,11 @@ export const PADS = [
         <div class="job-co">NASA Langley Research Center · Hampton, VA</div>
         <div class="job-desc">Engineered a testing framework for NASA's Safety-Critical Avionics Systems Branch, combining combinatorial and property-based testing for up to a 20x speedup.</div>
       </div>
+      <div class="job">
+        <div class="job-title">AI Software Engineer</div>
+        <div class="job-co">Penn GRASP Lab · Philadelphia, PA</div>
+        <div class="job-desc">Built a GAN-based robustness measure for robot locomotion controllers, tuning network architectures in TensorFlow.</div>
+      </div>
     `,
     staticHTML: `
       <section>
@@ -65,6 +70,11 @@ export const PADS = [
           <div class="job-title">Software Research Intern</div>
           <div class="job-co">NASA Langley Research Center · Hampton, VA</div>
           <div class="job-desc">Engineered a testing framework for NASA's Safety-Critical Avionics Systems Branch, combining combinatorial and property-based testing for up to a 20x speedup.</div>
+        </div>
+        <div class="job">
+          <div class="job-title">AI Software Engineer</div>
+          <div class="job-co">Penn GRASP Lab · Philadelphia, PA</div>
+          <div class="job-desc">Built a GAN-based robustness measure for robot locomotion controllers, tuning network architectures in TensorFlow.</div>
         </div>
       </section>
     `
