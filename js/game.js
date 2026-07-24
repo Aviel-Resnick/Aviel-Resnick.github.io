@@ -388,7 +388,9 @@ function applyPhysics(dt) {
   ship.x += ship.vx * dt;
   ship.y += ship.vy * dt;
 
-  ship.x = Math.max(20, Math.min(WORLD_WIDTH - 20, ship.x));
+  // Pac-Man-style wraparound instead of a hard wall at either edge.
+  if (ship.x < 0) ship.x += WORLD_WIDTH;
+  else if (ship.x > WORLD_WIDTH) ship.x -= WORLD_WIDTH;
   if (ship.y < 20) { ship.y = 20; ship.vy = Math.max(0, ship.vy); }
 
   const groundY = heightAt(ship.x);
