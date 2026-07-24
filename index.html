@@ -1,99 +1,65 @@
 <!doctype html>
-<html>
-  <head>    
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Developer | Personal Website">
-    <meta name="keywords" content="Avi Resnick, Aviel Resnick, Aerospace, AI, Developer, UPenn, University of Pennsylvania, Software Engineer, Programmer, Avi, Resnick, Coding, Lower Moreland, Computer Science, PL, Programming Languages, Research">
-    <meta name="author" content="Aviel Resnick">
-    <meta name="google-site-verification" content="UwssBFM1EuZx9hKOYSl5HIzh1RcNGzF_RXBqKCIqkM4" />
-    <title>Avi Resnick </title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Avi Resnick — Senior Software Engineer, San Francisco. Fly a lunar lander around an interactive resume.">
+<meta name="author" content="Aviel Resnick">
+<title>Avi Resnick — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <div id="game">
+    <canvas id="canvas"></canvas>
+  </div>
+  <div id="crt"></div>
 
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-
-  <body>
-    <div class="wrapper">
-      <div class="left">
-        <img id="headshot" src="./IMG_6739.jpeg" alt="Headshot">
-        <h1>
-          Avi Resnick
-        </h1>
-        <div id="links">
-          <a href="https://github.com/Aviel-Resnick"><i class="fa-brands fa-github fa-lg"></i> GitHub</a>
-          <a href="Aviel Resnick - Resume.pdf"><i class="fa-regular fa-file fa-lg"></i> Resume</a>
-          <a href="mailto:aviel.resnick@gmail.com"><i class="fa-regular fa-envelope fa-lg"></i> Mail</a>
-          <a href="https://www.linkedin.com/in/aviel-resnick/"><i class="fa-brands fa-linkedin fa-lg"></i> LinkedIn</a>
-        </div>
-        <!-- <h3>
-          Software Engineer
-        </h3> -->
-      </div>
-
-      <div class="right">
-        <p class="main-text">
-          I'm Avi Resnick, a software engineer with interests in aerospace, artificial intelligence, and full-stack software development. 
-          I recently graduated from the <a href="https://www.seas.upenn.edu/">University of Pennsylvania</a> with both Bachelor's and Master's Degrees of Science in Engineering in Computer Science.
-        </p>
-        <p>
-          Most recently, I worked as a full-stack software engineer for <a href="https://www.brightcove.com/">Brightcove</a>, where I developed seamless third-party integrations that enabled 
-          AI-driven features like text-to-video generation, short-form content multiplication, advanced video editing, and robust Roles and Permissions management. 
-        </p>
-        <p class="main-text">
-          In the past, I've engineered new tools and published research at <a href="https://www.nasa.gov/">NASA</a>, written mission-critical code for <a href="https://zenithaero.com/">Zenith Aerospace</a>, 
-          designed image processing software for medical research, and more.
-        </p>
-        <p class="main-text">
-          I am looking for full-time software engineering positions in the San Francisco Bay Area (or remote). If you're hiring, I'd love to connect! 
-        </p>
-
-        <h3>
-          Previous Positions
-        </h3>
-        <p class="main-text">
-          Full-Stack Software Engineer at <a href="https://www.brightcove.com/">Brightcove</a>
-        </p>
-        <p class="main-text">
-          Software Engineering Intern at <a href="https://zenithaero.com/">Zenith Aerospace</a>
-        </p>
-        <p class="main-text">
-          Software Research Intern at <a href="https://www.nasa.gov/langley/">NASA Langely Research Center </a>
-        </p>
-        <p class="main-text">
-          AI Research Engineer at <a href="https://www.grasp.upenn.edu/">GRASP Lab</a> 
-        </p>
-        <p class="main-text">
-          Software Engineering Intern at the <a href="https://www.chop.edu/">Children's Hospital of Philadelphia</a>
-        </p>
-        
-
-        <h3>
-          Publications
-        </h3>
-          <h4>
-            Don't Go Down the Rabbit Hole: Reprioritizing Enumeration for Property-Based Testing
-          </h4>
-          <p class="small-text">
-            Segev Elazar Mittelman, Aviel Resnick, Ivan Perez, Alwyn Goodloe, and Leonidas Lampropoulos. 2023. In Proceedings of the 16th ACM SIGPLAN International Haskell Symposium (Haskell '23), September 8-9, 2023, Seattle, WA, USA. ACM, New York, NY, USA, 13 pages. <a href="https://doi.org/10.1145/3609026.3609730">Download Paper</a>
-          </p>
-
-          <h4>
-            Novel Software for Automated Morphometric Analysis of Stented Arteries
-          </h4>
-          <p class="small-text">
-            Aviel Resnick, Bahman Hooshdaran, Benjamin B. Pressly, David T. Guerrero, Ivan S. Alferiev, Michael Chorny, Robert J. Levy, Ilia Fishbein. <a href="https://doi.org/10.1101/2020.01.30.927459">Download Paper</a>
-          </p>
-      </div>
+  <div id="hud">
+    <div class="row">
+      <span id="fuelLabel">FUEL USED</span>
+      <span class="bar-track" id="fuelBarTrack"><span class="bar-fill" id="fuelBar"></span></span>
+      <span id="fuelCounter"></span>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-  </body>
+    <div class="row"><span class="fuel-hint" id="fuelHint">[SHIFT+F] limited fuel mode</span></div>
+    <div class="row">V-SPD <span id="vspd">0</span></div>
+    <div class="row">ALT <span id="alt">0</span></div>
+  </div>
+
+  <div id="minimap">
+    <div class="track"></div>
+    <div class="ship" id="mmShip"></div>
+  </div>
+
+  <div id="controlsHint">
+    <div id="controlsLegend">&larr; &rarr; rotate &nbsp; &uarr; thrust</div>
+    <div id="modehint">[ENTER] AUTO-TOUR &nbsp; [ESC] SIMPLE VIEW</div>
+  </div>
+
+  <div id="welcome">
+    <div class="box">
+      <p>Click a section above to fly there</p>
+      <p>or use &larr; &rarr; &uarr; to pilot manually</p>
+      <p class="dim">[ENTER] starts auto-pilot</p>
+    </div>
+  </div>
+
+  <div id="panels"></div>
+
+  <div id="staticView">
+    <div class="wrap">
+      <div class="eyebrow">// SENIOR SOFTWARE ENGINEER</div>
+      <h1>AVI RESNICK</h1>
+      <div class="loc">San Francisco, CA</div>
+      <div id="mobileNote">This site has an interactive flying mode (arrow keys to pilot a lunar lander around this resume) that works best on desktop with a keyboard. Showing the simple view here instead.</div>
+      <div id="staticSections"></div>
+      <a class="backbtn" id="backToFlight">← back to flight mode [ENTER]</a>
+    </div>
+  </div>
+
+  <script type="module" src="js/game.js"></script>
+</body>
 </html>

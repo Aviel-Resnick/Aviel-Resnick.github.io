@@ -1,0 +1,225 @@
+:root{
+  --fg:#f4f4f4;
+  --glow: 0 0 6px rgba(244,244,244,.55), 0 0 1px rgba(244,244,244,.9);
+  --bg:#000;
+}
+*{box-sizing:border-box;}
+html,body{
+  margin:0; padding:0; width:100%; height:100%;
+  background:var(--bg); color:var(--fg);
+  font-family:'Share Tech Mono', 'Courier New', monospace;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--fg);}
+#game{ position:fixed; inset:0; }
+canvas{
+  display:block; width:100%; height:100%;
+  filter: drop-shadow(0 0 3px rgba(244,244,244,.5));
+}
+
+/* CRT scanline + vignette overlay */
+#crt{
+  position:fixed; inset:0; pointer-events:none; z-index:40;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.65) 100%);
+}
+
+/* HUD */
+#hud{
+  position:fixed; top:20px; left:20px; z-index:30;
+  font-size:14px; letter-spacing:1px; line-height:2;
+  color:#fff; text-shadow:var(--glow);
+  pointer-events:none;
+  user-select:none;
+}
+#hud .row{opacity:1;}
+#hud .bar-track{
+  display:inline-block; width:110px; height:10px; border:1px solid #fff;
+  vertical-align:middle; margin-left:8px; position:relative; top:-1px;
+}
+#hud .bar-fill{
+  display:block; height:100%; background:#fff; width:100%;
+  transition:width .1s linear;
+}
+#hud #fuelCounter{
+  margin-left:8px;
+}
+#hud .fuel-hint{
+  font-size:12px; opacity:.55;
+}
+#hud .fuel-hint.urgent{
+  opacity:1; animation:blinkFuel .9s steps(2) infinite;
+}
+@keyframes blinkFuel{ 50%{ opacity:.25; } }
+
+/* Minimap: number-line with tick marks per section */
+#minimap{
+  position:fixed; top:24px; left:50%; transform:translateX(-50%);
+  width:min(64vw, 640px); height:60px; z-index:30;
+  pointer-events:none; user-select:none;
+}
+#minimap .track{
+  position:absolute; top:28px; left:0; right:0; height:2px; background:rgba(255,255,255,.85);
+}
+#minimap .track::before,
+#minimap .track::after{
+  content:''; position:absolute; top:-7px; width:2px; height:16px; background:rgba(255,255,255,.5);
+}
+#minimap .track::before{ left:0; }
+#minimap .track::after{ right:0; }
+#minimap .pad{
+  position:absolute; top:6px; width:44px; height:48px; margin-left:-22px;
+  pointer-events:auto; cursor:pointer;
+}
+#minimap .pad-tick{
+  position:absolute; top:14px; left:50%; width:2px; height:18px; margin-left:-1px;
+  background:rgba(255,255,255,.55);
+  transition:background .15s ease, box-shadow .15s ease;
+}
+#minimap .pad:hover .pad-tick,
+#minimap .pad.active .pad-tick{ background:#fff; box-shadow:0 0 8px rgba(255,255,255,.9); }
+#minimap .pad-label{
+  position:absolute; top:36px; left:50%; transform:translateX(-50%);
+  font-size:11px; letter-spacing:1.5px; white-space:nowrap; color:#fff; opacity:.65;
+  transition:opacity .15s ease, text-shadow .15s ease;
+}
+/* Bracket the labels like the [ENTER]/[ESC] hints elsewhere in the HUD, so
+   the same "this is an actionable control" convention reads onto the minimap. */
+#minimap .pad-label::before{ content:'[ '; }
+#minimap .pad-label::after{ content:' ]'; }
+#minimap .pad:hover .pad-label,
+#minimap .pad.active .pad-label{ opacity:1; text-shadow:0 0 8px rgba(255,255,255,.9); }
+#minimap .pad:hover .pad-tick{ transform:scaleY(1.3); }
+#minimap .ship{
+  position:absolute; top:16px; width:0; height:0; margin-left:-6px;
+  border-left:6px solid transparent; border-right:6px solid transparent;
+  border-top:11px solid #fff;
+  filter:drop-shadow(0 0 6px rgba(255,255,255,.9));
+  transition:left .05s linear;
+}
+
+/* Controls legend + mode hint, bottom-left — permanent, not a dismissable
+   modal, so the controls are always available at a glance instead of only
+   shown once on load. */
+#controlsHint{
+  position:fixed; bottom:20px; left:20px; z-index:30;
+  pointer-events:none; user-select:none;
+}
+#controlsLegend{
+  font-size:12px; letter-spacing:1px; color:#fff; opacity:.6;
+  text-shadow:var(--glow); margin-bottom:4px;
+}
+#modehint{
+  font-size:13px; letter-spacing:1px; color:#fff; opacity:1;
+  text-shadow:var(--glow);
+}
+
+/* Welcome message: fades out on the first key press or click (see game.js),
+   not a timer — click-through (pointer-events:none) so it never blocks
+   clicking the minimap it's pointing at. */
+#welcome{
+  /* Centered under the minimap (top:24px, height:60px) rather than the full
+     viewport, so it reads as directly tied to it. */
+  position:fixed; top:100px; left:0; right:0; z-index:45;
+  display:flex; justify-content:center;
+  pointer-events:none; user-select:none;
+  transition:opacity .6s ease;
+}
+#welcome.hidden{ opacity:0; }
+#welcome .box{
+  border:1px solid var(--fg); padding:22px 30px; text-align:center;
+  text-shadow:var(--glow); max-width:380px;
+  background:rgba(0,0,0,.45);
+}
+#welcome p{ font-size:12px; line-height:1.8; margin:0; opacity:.9;}
+#welcome p.dim{ opacity:.55; margin-top:10px;}
+
+/* Content panels */
+#panels{
+  position:fixed; right:0; top:0; bottom:0; z-index:25;
+  display:flex; align-items:center;
+  pointer-events:none;
+}
+/* Panel sizing/typography is fluid (clamp between a short-screen floor and
+   the desktop ceiling) rather than fixed px, so it scales down on shorter or
+   smaller laptop displays instead of overflowing or crowding the HUD — the
+   floor values are what the mobile breakpoint below used to hardcode. */
+.panel{
+  position:absolute; right:clamp(16px, 3vw, 32px); width:min(92vw, 520px);
+  max-height:min(80vh, 640px); overflow-y:auto;
+  border:1px solid #fff; background:rgba(0,0,0,.86);
+  padding:clamp(18px, 4vh, 32px) clamp(20px, 4vw, 38px); text-shadow:var(--glow);
+  opacity:0; transform:translateX(30px);
+  transition:opacity .5s ease, transform .5s ease;
+  pointer-events:auto;
+}
+.panel.visible{ opacity:1; transform:translateX(0); }
+.panel .eyebrow{ font-size:clamp(11px, 1.6vh, 13px); letter-spacing:2px; opacity:.85; margin-bottom:6px;}
+.panel h2{ font-size:clamp(19px, 3vh, 28px); letter-spacing:2.5px; margin:0 0 8px; font-weight:normal;}
+.panel .loc{ font-size:clamp(12px, 1.7vh, 14px); opacity:.75; margin-bottom:clamp(10px, 2.5vh, 20px); }
+.panel p{ font-size:clamp(13px, 1.9vh, 16px); line-height:1.75; opacity:.95; margin:0 0 clamp(8px, 1.7vh, 14px);}
+.panel p.hint{ opacity:.6; font-size:clamp(11px, 1.5vh, 13px); margin-top:clamp(12px, 2.5vh, 20px);}
+.panel .job{ margin-bottom:clamp(12px, 2.5vh, 20px); padding-left:14px; border-left:1px solid rgba(255,255,255,.35);}
+.panel .job.current{ border-left:2px solid #fff; }
+.panel .job-title{ font-size:clamp(14px, 2vh, 17px); letter-spacing:.5px; }
+.panel .job.current .job-title{ font-size:clamp(15px, 2.2vh, 19px); }
+.panel .job.current .job-title::before{ content:'▸ '; }
+.panel .job-co{ font-size:clamp(12px, 1.7vh, 14px); opacity:.8; margin-top:3px;}
+.panel .job-date{ font-size:clamp(11px, 1.5vh, 13px); opacity:.6; margin-top:3px;}
+.panel .job-desc{ font-size:clamp(12px, 1.7vh, 14px); opacity:.85; margin-top:6px; line-height:1.6;}
+.panel .links{ display:flex; flex-direction:column; gap:clamp(10px, 1.8vh, 14px); margin-top:clamp(12px, 2vh, 18px);}
+.panel .links a{ font-size:clamp(13px, 1.9vh, 16px); text-decoration:none; border-bottom:1px dashed rgba(255,255,255,.5); width:fit-content; padding-bottom:2px;}
+.panel .links a:hover{ border-bottom-style:solid; }
+
+/* Smaller laptop screens: not mobile, but short/narrow enough that the
+   minimap and panel need to pull in a bit further before they'd start
+   crowding each other — the clamp()s above already shrink the panel's own
+   type, this just tightens layout (minimap sits a bit higher/narrower, the
+   panel's max-height leaves more clearance under it). */
+@media (max-height:820px), (max-width:1100px){
+  #minimap{ top:14px; width:min(58vw, 520px); }
+  .panel{ max-height:70vh; }
+}
+
+@media (max-width:640px){
+  #panels{ align-items:flex-end; }
+  .panel{ right:12px; left:12px; width:auto; bottom:70px; max-height:50vh; }
+  #minimap{ width:80vw; }
+}
+
+/* Static / plain mode */
+#staticView{
+  position:fixed; inset:0; z-index:60; background:var(--bg);
+  overflow-y:auto; display:none;
+}
+#staticView.visible{ display:block; }
+#staticView .wrap{ max-width:640px; margin:0 auto; padding:60px 24px 100px; text-shadow:var(--glow); }
+#staticView h1{ font-size:22px; letter-spacing:3px; margin:0 0 4px; font-weight:normal;}
+#staticView .eyebrow{ font-size:13px; letter-spacing:2px; opacity:.9; margin-bottom:2px;}
+#staticView .loc{ font-size:12px; opacity:.7; margin-bottom:28px;}
+#staticView section{ margin-bottom:34px; }
+#staticView h2{ font-size:14px; letter-spacing:2px; border-bottom:1px solid rgba(244,244,244,.4); padding-bottom:6px; margin:0 0 14px; font-weight:normal;}
+#staticView p{ font-size:13px; line-height:1.8; opacity:.92; }
+#staticView .job{ margin-bottom:16px; padding-left:10px; border-left:1px solid rgba(244,244,244,.35);}
+#staticView .job.current{ border-left:2px solid var(--fg); }
+#staticView .job-title{ font-size:14px; }
+#staticView .job.current .job-title::before{ content:'▸ '; }
+#staticView .job-co{ font-size:12px; opacity:.8; margin-top:2px;}
+#staticView .job-date{ font-size:11px; opacity:.6; margin-top:2px;}
+#staticView .job-desc{ font-size:12px; opacity:.8; margin-top:4px; line-height:1.6;}
+#staticView .links{ display:flex; flex-wrap:wrap; gap:16px; margin-top:10px;}
+#staticView .links a{ font-size:13px; text-decoration:none; border-bottom:1px dashed rgba(244,244,244,.5); padding-bottom:2px;}
+#staticView .backbtn{
+  display:inline-block; margin-top:10px; font-size:12px; letter-spacing:1px;
+  border:1px solid var(--fg); padding:8px 14px; text-decoration:none; cursor:pointer;
+}
+#staticView .backbtn.disabled{
+  opacity:.4; pointer-events:none; cursor:default;
+}
+#mobileNote{
+  display:none; font-size:12px; line-height:1.7; opacity:.75;
+  border:1px dashed rgba(244,244,244,.5); padding:12px 14px; margin-bottom:28px;
+}
+#mobileNote.visible{ display:block; }
