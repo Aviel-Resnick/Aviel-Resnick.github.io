@@ -139,16 +139,21 @@ canvas{
 /* Content panels */
 #panels{
   position:fixed; right:0; top:0; bottom:0; z-index:25;
-  display:flex; align-items:center;
+  display:flex; align-items:flex-start;
   pointer-events:none;
 }
 /* Panel sizing/typography is fluid (clamp between a short-screen floor and
    the desktop ceiling) rather than fixed px, so it scales down on shorter or
    smaller laptop displays instead of overflowing or crowding the HUD — the
-   floor values are what the mobile breakpoint below used to hardcode. */
+   floor values are what the mobile breakpoint below used to hardcode.
+   Anchored just below the minimap (instead of vertically centered) and sized
+   off the remaining viewport height, so the tallest card (Experience, 5
+   entries) fits without an internal scroll on ordinary screens rather than
+   being capped at a fraction of the viewport regardless of how much room is
+   actually free below the minimap. */
 .panel{
-  position:absolute; right:clamp(16px, 3vw, 32px); width:min(92vw, 520px);
-  max-height:min(80vh, 640px); overflow-y:auto;
+  position:absolute; top:88px; right:clamp(16px, 3vw, 32px); width:min(92vw, 520px);
+  max-height:calc(100vh - 108px); overflow-y:auto;
   border:1px solid #fff; background:rgba(0,0,0,.86);
   padding:clamp(18px, 4vh, 32px) clamp(20px, 4vw, 38px); text-shadow:var(--glow);
   opacity:0; transform:translateX(30px);
@@ -180,12 +185,11 @@ canvas{
    panel's max-height leaves more clearance under it). */
 @media (max-height:820px), (max-width:1100px){
   #minimap{ top:14px; width:min(58vw, 520px); }
-  .panel{ max-height:70vh; }
 }
 
 @media (max-width:640px){
   #panels{ align-items:flex-end; }
-  .panel{ right:12px; left:12px; width:auto; bottom:70px; max-height:50vh; }
+  .panel{ top:auto; right:12px; left:12px; width:auto; bottom:70px; max-height:50vh; }
   #minimap{ width:80vw; }
 }
 
