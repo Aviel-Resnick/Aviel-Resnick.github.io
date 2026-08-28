@@ -4,8 +4,7 @@ My personal website — an interactive resume built as a lunar lander game. Fly 
 
 ## Deploy model
 
-This repo owns the `avielresnick.com` custom domain via GitHub Pages (served from `master`, root path). It does not contain hand-edited game source anymore — the root (and any project subdirectories, e.g. future `/oceans-eleven`) are pushed here automatically by each project's own CI:
-
+This repo owns the `avielresnick.com` custom domain via GitHub Pages (served from `master`, root path). 
 - Homepage/lander source lives in [`lunar-lander-resume`](https://github.com/Aviel-Resnick/lunar-lander-resume); its `public/` folder is what gets deployed here on every push to that repo's `main`.
 - Each project repo pushes via a scoped, write-only SSH deploy key registered on this repo (see repo Settings → Deploy keys), not a personal access token.
 
